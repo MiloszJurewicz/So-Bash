@@ -1,0 +1,39 @@
+#!/bin/bash
+
+dir=$1
+
+# checks if number of input parameters is correct
+if [ $# == 1 ];	then
+
+	#checks if its directory
+	if [ -d $dir ]; then 
+
+		#enter directory
+		cd "$dir" 
+
+		#current location
+		whereAmI=$(pwd)
+		echo "Current Directory: $whereAmI"	
+
+		#for all in current location
+		for file in *
+		do
+
+			#if file has extension .old then remove it
+			if [[ $file == *.old ]]; then
+				rm "$file"
+			#if file is readable rename it	
+			elif [[ -w $file ]]; then
+				
+				mv "$file" "$file.old"	
+			fi	
+		done
+
+
+	else 
+		echo "Not real Directory"
+	fi
+else
+		echo "Wrong number of parameters"
+
+fi

@@ -1,0 +1,87 @@
+#!/bin/bash
+
+directory=$1
+fileList=$2
+
+if [ $# == 2 ];	then
+
+	if [[ -d $directory && -f $fileList ]]; then 
+
+	#IFS=$'\r\n' GLOBIGNORE='*' command eval  'XYZ=($(cat "$fileList"))'
+
+	#ZFS=()
+	#for file in "$directory"/*; do
+	#	ZFS+=("${file##*/}")		#`basename "$file"`
+	#	#echo "$ZFS"
+	#done
+
+	while read p; do
+
+		file_missing=false
+
+		for file2 in "$directory"/*; do
+
+			name1=$p
+			name2=${file2##*/}
+
+			if [[ $name1 == $name2 ]]; then
+				#arrSame+=$p
+				#echo "Exists in both dirs $name2"
+
+				file_missing=true
+			fi
+		done	
+
+
+		#echo "$file_missing"
+
+		if [ "$file_missing" = false ]; then
+			
+			echo "echo missing from dir: $p"
+		fi
+
+	done < $fileList
+
+
+	for file1 in "$directory"/*; do
+
+		file_missing=false
+
+
+		#echo "$file1"
+
+		while read p; do
+
+			#echo "$p"
+
+			#name1=$p
+			#name2=${file2##*/}
+
+			if [[ $p == ${file1##*/} ]]; then
+				#arrSame+=$p
+				#echo "Exists in both dirs $name2"
+
+				file_missing=true
+			fi
+
+		done < $fileList
+
+		if [ "$file_missing" = false ]; then			
+			echo "echo missing from list: ${file1##*/}"
+		fi
+
+	done
+
+
+
+
+
+
+
+	else
+		echo "Not real Directory"
+	fi
+
+else
+		echo "Wrong number of parameters"
+fi

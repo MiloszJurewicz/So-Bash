@@ -1,0 +1,27 @@
+#!/bin/bash
+
+fileList=$1
+
+if [ $# == 1 ];	then
+
+	if [ -f $fileList ]; then 
+
+
+		#$(basename $fileList)
+		destDir1=$(pwd)/$(basename $fileList)
+		echo "$destDir1"
+
+		while read p; do
+
+			echo "filename: $p" >> "$destDir1"
+			cat "$p" >> "$destDir1"
+
+
+		done < $fileList
+
+	else
+		echo "Not real Directory"
+	fi
+else
+		echo "Wrong number of parameters"
+fi

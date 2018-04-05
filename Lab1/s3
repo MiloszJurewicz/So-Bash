@@ -1,0 +1,31 @@
+#!/bin/bash
+
+dir=$1
+
+if [ $# == 1 ];	then
+
+	#checks if its directory
+	if [ -d $dir ]; then 
+
+		cd "$dir" 
+
+		#current location
+		whereAmI=$(pwd)
+		echo "Current Directory: $whereAmI"	
+
+		for file in *
+		do
+
+			if [ -x "$file" ]; then
+				:
+			else
+				rm "$file"
+			fi
+		done
+		
+	else
+		echo "Not real Directory"
+	fi
+else
+		echo "Wrong number of parameters"
+fi

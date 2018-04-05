@@ -1,0 +1,30 @@
+#!/bin/bash
+
+dir=$1
+fileList=$2
+
+#check if nubmer of param is right
+
+if [ $# == 2 ];then 
+
+	if [[ -d $1 && -f $2 ]]; then
+		cd "$dir"		
+
+		while read p; do
+		#echo "$p"
+			if [ -e "$p" ]; then
+				echo "file exists"
+
+			else
+				touch "$p"
+			fi
+
+		done < $fileList
+
+	else
+		echo "Something went wrong"
+	fi
+
+else
+	echo "Something went wrong XD"
+fi

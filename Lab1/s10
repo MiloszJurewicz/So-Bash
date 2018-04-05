@@ -1,0 +1,29 @@
+#!/bin/bash
+
+dirFirst=$1
+dirSecond=$2
+
+if [ $# == 2 ];	then
+
+	if [[ -d $dirFirst && -d $dirSecond ]]; then 
+
+		#echo "$dirSource"
+		#echo "$dirDest"
+		#diff <(find /home/jupiter/SystemyOp/TestFolder -type f -exec md5sum {} + | sort -k 2) <(find /home/jupiter/SystemyOp/TestFolder2 -type f -exec md5sum {} + | sort -k 2)
+		
+		for file1 in "$dirFirst"/*;	do
+			for file2 in "$dirSecond"/*; do
+				name1=${file1##*/}
+				name2=${file2##*/}
+				if [[ $name1 == $name2 ]]; then
+					echo "Exists in both dirs $file1"
+				fi
+			done
+		done
+
+	else
+		echo "Not real Directory"
+	fi
+else
+		echo "Wrong number of parameters"
+fi

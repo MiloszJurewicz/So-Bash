@@ -1,0 +1,37 @@
+#!/bin/bash
+
+dir=$1
+
+if [ $# == 1 ];	then
+
+	if [ -d $dir ]; then 
+
+		cd "$dir"
+
+		for f in *; do
+
+			#echo "$f"
+
+			if [ -d "$f" ]; then
+
+				#echo "$f"
+				#echo "found subdir"
+
+				echo $dir/$f/*
+				echo $dir/
+
+				mv $dir/$f/*	$dir/
+				rm -rf $dir/$f
+				#echo "found subdir"
+
+			fi
+		done
+
+
+	else
+	echo "Not real Directory"
+	fi
+
+else
+		echo "Wrong number of parameters"
+fi

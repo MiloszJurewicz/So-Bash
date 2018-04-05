@@ -1,0 +1,32 @@
+#!/bin/bash
+
+dir=$1
+fileExtension=$2
+
+if [ $# == 2 ];	then
+
+	if [ -d $dir ]; then 
+
+		cd "$dir" 
+		
+		for file in `ls -S *`
+		do	
+
+			if [ "${file: -4}" == "$fileExtension" ]; then	
+
+			echo "$file" >> all
+			echo "------------" >> all
+			
+			cat $file >> all
+
+			echo -e "\n" >> all
+			
+			fi
+		done
+
+	else
+		echo "Not real Directory"
+	fi
+else
+		echo "Wrong number of parameters"
+fi

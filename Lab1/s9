@@ -1,0 +1,18 @@
+#!/bin/bash
+
+dir=$1
+
+if [ $# == 1 ];	then
+
+	if [ -d $dir ]; then 
+	
+	cd "$dir"
+	find . -size 0 -delete
+
+	else
+		echo "Not real Directory"
+	fi
+
+else
+	echo "Wrong number of parameters"
+fi

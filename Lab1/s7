@@ -1,0 +1,27 @@
+#!/bin/bash
+
+dirSource=$1
+dirDest=$2
+
+if [ $# == 2 ];	then
+
+	if [[ -d $dirSource && -d $dirDest ]]; then 
+
+		#echo "$dirSource"
+		#echo "$dirDest"
+
+		for file in "$dirSource"/*
+		do
+			if [ -x "$file" ]; then
+				echo "$file"
+				cp "$file" "$dirDest"	
+			fi
+			
+		done
+
+	else
+		echo "Not real Directory"
+	fi
+else
+		echo "Wrong number of parameters"
+fi
